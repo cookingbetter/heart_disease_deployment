@@ -40,10 +40,10 @@ def main():
     trestbps = st.text_input("Артериальное давление в покое")  
     chol = st.text_input("Уровень холестрерина в крови(ммоль/л)")
     #coefficient to translate from 'ммоль/л' to 'mg/dl'
-    chol = 38.46 * chol
+    chol = 38.46 * float(chol)
     fbs = st.text_input("Уровень сахара в крови натощак(ммоль/л)")
-    fbs = 38.46 * fbs
-    fbs = (1 if fbs > 120 else 0)
+    fbs = 38.46 * int(fbs)
+    fbs = (1 if float(fbs) > 120 else 0)
     thalach = st.text_input("Максимально количество ударов сердца в минуту")
     exang = st.text_input("Наличие ангины, вызванной физ. нагрузкой(0-нет, 1-да)")
     
