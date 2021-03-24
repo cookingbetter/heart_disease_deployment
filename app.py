@@ -19,8 +19,11 @@ st.image(image,
       use_column_width=True)
 
 
-def predict_disease(age,sex,trestbps, chol, fbs, thalach, exang):
-    input=np.array([[age,sex,trestbps,thalach]]).astype(np.float64)
+def predict_disease(age,sex,trestbps, chol, fbs, thalach, fbs):
+    input=np.array([[age,sex,trestbps, chol, fbs, thalach, fbs]]).astype(np.float64)
+    #coefficient to translate from 'ммоль/л' to 'mg/dl'
+    input[0][3] = input[0][3] * 38.46
+    input[0][4] = (1 if (input[0][4] * 38.46) > 120 else 0)
     prediction = model.predict(input)
     #pred = '{0:.{1}f}'.format(prediction[0][0], 2)
     return int(prediction)
@@ -40,10 +43,10 @@ def main():
     trestbps = st.text_input("Артериальное давление в покое")  
     chol = st.text_input("Уровень холестрерина в крови(ммоль/л)")
     #coefficient to translate from 'ммоль/л' to 'mg/dl'
-    chol = 38.46 * float(chol)
+    #chol = float(38.46) * chol
     fbs = st.text_input("Уровень сахара в крови натощак(ммоль/л)")
-    fbs = 38.46 * int(fbs)
-    fbs = (1 if float(fbs) > 120 else 0)
+    #fbs = float(38.46) * fbs
+    #fbs = (1 if float(fbs) > 120 else 0)
     thalach = st.text_input("Максимально количество ударов сердца в минуту")
     exang = st.text_input("Наличие ангины, вызванной физ. нагрузкой(0-нет, 1-да)")
     
