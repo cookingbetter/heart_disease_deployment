@@ -19,8 +19,8 @@ st.image(image,
       use_column_width=True)
 
 
-def predict_disease(age,sex,trestbps, chol, fbs, thalach, fbs):
-    input=np.array([[age,sex,trestbps, chol, fbs, thalach, fbs]]).astype(np.float64)
+def predict_disease(age,sex,trestbps, chol, fbs, thalach, exang):
+    input=np.array([[age,sex,trestbps, chol, fbs, thalach, exang]).astype(np.float64)
     #coefficient to translate from 'ммоль/л' to 'mg/dl'
     input[0][3] = input[0][3] * 38.46
     input[0][4] = (1 if (input[0][4] * 38.46) > 120 else 0)
